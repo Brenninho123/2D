@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+    <!-- Nome do app -->
+    <app title="2D" file="2d" package="com.ander.twod" />
+
+    <!-- Código fonte -->
+    <source path="src" />
+
+    <!-- Bibliotecas -->
+    <haxelib name="openfl" />
+    <haxelib name="haxeui-core" />
+    <haxelib name="haxeui-openfl" />
+
+    <!-- Classe principal -->
+    <main class="Main" />
+
+    <!-- Janela -->
+    <window width="800" height="600" fps="60" background="#1a1a1a" />
+
+    <!-- Assets -->
+    <assets path="assets" rename="assets" />
+
+    <!-- Plataformas -->
+    <set name="desktop" if="windows || linux || mac" />
+    <set name="web" if="html5" />
+
+</project>
