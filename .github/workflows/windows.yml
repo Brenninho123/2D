@@ -1,0 +1,39 @@
+name: Build Windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.3
+
+      - name: Instalar bibliotecas
+        run: |
+          haxelib install openfl --quiet
+          haxelib install lime --quiet
+          haxelib install haxeui-core --quiet
+          haxelib install haxeui-openfl --quiet
+          haxelib run openfl setup
+
+      - name: Build Windows
+        run: |
+          haxelib run lime build windows -release
+
+      - name: Enviar artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: export/release/windows/bin
